@@ -1,7 +1,7 @@
 package ru.hivislav.educationproject
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import ru.hivislav.educationproject.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), MainView {
@@ -18,14 +18,14 @@ class MainActivity : AppCompatActivity(), MainView {
         initPresenter()
 
         with(binding) {
-            btnNumber1.setOnClickListener {
-                presenter.onCounterClick(BUTTON_ONE_ID)
+            buttonNumberOne.setOnClickListener {
+                presenter.onClickButtonOne()
             }
-            btnNumber2.setOnClickListener {
-                presenter.onCounterClick(BUTTON_TWO_ID)
+            buttonNumberTwo.setOnClickListener {
+                presenter.onClickButtonTwo()
             }
-            btnNumber3.setOnClickListener {
-                presenter.onCounterClick(BUTTON_THREE_ID)
+            buttonNumberThree.setOnClickListener {
+                presenter.onClickButtonThree()
             }
         }
     }
@@ -34,13 +34,15 @@ class MainActivity : AppCompatActivity(), MainView {
         presenter = CountersPresenter(this)
     }
 
-    override fun setText(counter: String, dataPosition: Int) {
-        with(binding) {
-            when (dataPosition) {
-                DATA_POSITION_FOR_BUTTON_ONE -> tvText1.text = counter
-                DATA_POSITION_FOR_BUTTON_TWO -> tvText2.text = counter
-                DATA_POSITION_FOR_BUTTON_THREE -> tvText3.text = counter
-            }
-        }
+    override fun setTextCounterOne(counter: String) = with(binding) {
+        textViewOne.text = counter
+    }
+
+    override fun setTextCounterTwo(counter: String) = with(binding) {
+        textViewTwo.text = counter
+    }
+
+    override fun setTextCounterThree(counter: String) = with(binding) {
+        textViewThree.text = counter
     }
 }

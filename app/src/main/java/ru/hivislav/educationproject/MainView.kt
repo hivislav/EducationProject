@@ -1,5 +1,8 @@
 package ru.hivislav.educationproject
 
 interface MainView {
-    fun setText(counter: String, dataPosition: Int)
+
+    fun setTextCounterOne(counter: String)
+    fun setTextCounterTwo(counter: String)
+    fun setTextCounterThree(counter: String)
 }

@@ -5,20 +5,18 @@ class CountersPresenter(
 ) {
     private val model = CountersModel()
 
-    fun onCounterClick(id: Int) {
-        when(id) {
-            BUTTON_ONE_ID -> {
-                val newValue = model.next(DATA_POSITION_FOR_BUTTON_ONE)
-                view.setText(newValue.toString(), DATA_POSITION_FOR_BUTTON_ONE)
-            }
-            BUTTON_TWO_ID -> {
-                val newValue = model.next(DATA_POSITION_FOR_BUTTON_TWO)
-                view.setText(newValue.toString(), DATA_POSITION_FOR_BUTTON_TWO)
-            }
-            BUTTON_THREE_ID -> {
-                val newValue = model.next(DATA_POSITION_FOR_BUTTON_THREE)
-                view.setText(newValue.toString(), DATA_POSITION_FOR_BUTTON_THREE)
-            }
-        }
+    fun onClickButtonOne(){
+        val newValue = model.next(DATA_POSITION_FOR_BUTTON_ONE)
+        view.setTextCounterOne(newValue.toString())
+    }
+
+    fun onClickButtonTwo(){
+        val newValue = model.next(DATA_POSITION_FOR_BUTTON_TWO)
+        view.setTextCounterTwo(newValue.toString())
+    }
+
+    fun onClickButtonThree(){
+        val newValue = model.next(DATA_POSITION_FOR_BUTTON_THREE)
+        view.setTextCounterThree(newValue.toString())
     }
 }
