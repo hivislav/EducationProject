@@ -1,4 +1,4 @@
-package ru.hivislav.educationproject.view
+package ru.hivislav.educationproject.view.userslist
 
 import android.view.LayoutInflater
 import android.view.View
