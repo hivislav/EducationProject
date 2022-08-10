@@ -1,22 +1,16 @@
 package ru.hivislav.educationproject
 
+import moxy.MvpPresenter
+import ru.hivislav.educationproject.repository.GithubRepository
+import ru.hivislav.educationproject.repository.impl.CountersRepository
+import ru.hivislav.educationproject.view.MainView
+
 class CountersPresenter(
-    private val view: MainView
-) {
-    private val model = CountersModel()
+    private val repository: GithubRepository
+): MvpPresenter<MainView>() {
 
-    fun onClickButtonOne(){
-        val newValue = model.next(DATA_POSITION_FOR_BUTTON_ONE)
-        view.setTextCounterOne(newValue.toString())
-    }
-
-    fun onClickButtonTwo(){
-        val newValue = model.next(DATA_POSITION_FOR_BUTTON_TWO)
-        view.setTextCounterTwo(newValue.toString())
-    }
-
-    fun onClickButtonThree(){
-        val newValue = model.next(DATA_POSITION_FOR_BUTTON_THREE)
-        view.setTextCounterThree(newValue.toString())
+    override fun onFirstViewAttach() {
+        super.onFirstViewAttach()
+        viewState.initList(repository.getUsers())
     }
 }

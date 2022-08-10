@@ -1,6 +1,6 @@
-package ru.hivislav.educationproject
+package ru.hivislav.educationproject.repository.impl
 
-class CountersModel {
+class CountersRepository {
     private val counters = mutableListOf(0, 0, 0)
 
     fun getCurrent(dataPosition: Int): Int {
