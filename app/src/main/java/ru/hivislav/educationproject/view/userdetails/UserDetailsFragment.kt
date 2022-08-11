@@ -1,4 +1,4 @@
-package ru.hivislav.educationproject.view.userslist
+package ru.hivislav.educationproject.view.userdetails
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,25 +9,23 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import ru.hivislav.educationproject.MyApplication
+import ru.hivislav.educationproject.databinding.FragmentUserDetailsBinding
 import ru.hivislav.educationproject.databinding.FragmentUsersListBinding
 import ru.hivislav.educationproject.model.GithubUser
+import ru.hivislav.educationproject.presenter.UserDetailsPresenter
 import ru.hivislav.educationproject.presenter.UsersPresenter
 import ru.hivislav.educationproject.repository.impl.GithubRepositoryImpl
 import ru.hivislav.educationproject.utils.OnBackPressedListener
 
-class UsersListFragment: MvpAppCompatFragment(), UsersView, OnBackPressedListener {
+const val USER_DETAILS_EXTRA = "USER_DETAILS_EXTRA"
 
-    private val adapter = UserAdapter(object: OnItemClickListener{
-        override fun onItemClick(login: String) {
-            presenter.openUserDetailsFragment(login)
-        }
-    } )
+class UserDetailsFragment: MvpAppCompatFragment(), UserDetailsView, OnBackPressedListener {
 
-    private var _binding: FragmentUsersListBinding? = null
+    private var _binding: FragmentUserDetailsBinding? = null
     private val binding get() = _binding!!
 
     private val presenter by moxyPresenter {
-        UsersPresenter(GithubRepositoryImpl(), MyApplication.instance.router)
+        UserDetailsPresenter(MyApplication.instance.router)
     }
 
     override fun onCreateView(
@@ -35,18 +33,15 @@ class UsersListFragment: MvpAppCompatFragment(), UsersView, OnBackPressedListene
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentUsersListBinding.inflate(inflater, container, false)
+        _binding = FragmentUserDetailsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        with(binding) {
-            recyclerViewGithubUsers.layoutManager = LinearLayoutManager(requireContext())
-            //установка для подгрузки определенного количества item'ов в кэш
-            recyclerViewGithubUsers.setItemViewCacheSize(2)
-            recyclerViewGithubUsers.adapter = adapter
-            recyclerViewGithubUsers.addItemDecoration(DividerItemDecoration(requireContext(), LinearLayoutManager.VERTICAL))
+
+        arguments?.getString(USER_DETAILS_EXTRA)?.let {
+            binding.userDetailsLogin.text = it
         }
     }
 
@@ -56,13 +51,14 @@ class UsersListFragment: MvpAppCompatFragment(), UsersView, OnBackPressedListene
     }
 
     companion object {
-        fun getInstance(): UsersListFragment {
-            return UsersListFragment()
+        fun getInstance(login: String): UserDetailsFragment {
+            val fragment = UserDetailsFragment()
+            val bundle = Bundle().apply {
+                putString(USER_DETAILS_EXTRA, login)
+            }
+            fragment.arguments = bundle
+            return fragment
         }
-    }
-
-    override fun initList(list: List<GithubUser>) {
-        adapter.users = list
     }
 
     override fun onBackPressed() = presenter.onBackPressed()

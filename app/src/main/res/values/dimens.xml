@@ -2,4 +2,5 @@
 <resources>
     <dimen name="view_holder_text_size">40sp</dimen>
     <dimen name="view_holder_padding">16dp</dimen>
+    <dimen name="user_details_login_text_size">48sp</dimen>
 </resources>

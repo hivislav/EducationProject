@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import ru.hivislav.educationproject.R
 import ru.hivislav.educationproject.model.GithubUser
 
-class UserAdapter(): RecyclerView.Adapter<UserAdapter.GithubUserViewHolder>() {
+class UserAdapter(
+    private val onItemClickListener: OnItemClickListener
+): RecyclerView.Adapter<UserAdapter.GithubUserViewHolder>() {
 
     var users: List<GithubUser> = emptyList()
         set(value) {
@@ -32,6 +34,10 @@ class UserAdapter(): RecyclerView.Adapter<UserAdapter.GithubUserViewHolder>() {
 
         fun bind(item: GithubUser) = with(item) {
             viewHolderLogin.text = login
+
+            itemView.setOnClickListener {
+                onItemClickListener.onItemClick(login)
+            }
         }
     }
 }
