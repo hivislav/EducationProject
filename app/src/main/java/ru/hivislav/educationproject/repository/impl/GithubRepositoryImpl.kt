@@ -1,7 +1,10 @@
 package ru.hivislav.educationproject.repository.impl
 
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Single
 import ru.hivislav.educationproject.model.GithubUser
 import ru.hivislav.educationproject.repository.GithubRepository
+import java.util.concurrent.TimeUnit
 
 class GithubRepositoryImpl: GithubRepository {
 
@@ -20,7 +23,10 @@ class GithubRepositoryImpl: GithubRepository {
         GithubUser("Alex")
     )
 
-    override fun getUsers(): List<GithubUser> {
-        return repositories
+    override fun getUsers(): Single<List<GithubUser>> {
+        return Single
+            .create<List<GithubUser>> {
+            it.onSuccess(repositories)
+        }
     }
 }

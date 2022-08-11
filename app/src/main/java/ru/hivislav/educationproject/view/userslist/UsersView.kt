@@ -9,4 +9,6 @@ import ru.hivislav.educationproject.model.GithubUser
 interface UsersView: MvpView {
 
     fun initList(list: List<GithubUser>)
+    fun showProgressBar()
+    fun hideProgressBar()
 }

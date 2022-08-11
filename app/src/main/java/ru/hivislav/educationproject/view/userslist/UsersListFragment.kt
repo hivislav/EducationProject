@@ -14,6 +14,8 @@ import ru.hivislav.educationproject.model.GithubUser
 import ru.hivislav.educationproject.presenter.UsersPresenter
 import ru.hivislav.educationproject.repository.impl.GithubRepositoryImpl
 import ru.hivislav.educationproject.utils.OnBackPressedListener
+import ru.hivislav.educationproject.utils.hide
+import ru.hivislav.educationproject.utils.show
 
 class UsersListFragment: MvpAppCompatFragment(), UsersView, OnBackPressedListener {
 
@@ -63,6 +65,14 @@ class UsersListFragment: MvpAppCompatFragment(), UsersView, OnBackPressedListene
 
     override fun initList(list: List<GithubUser>) {
         adapter.users = list
+    }
+
+    override fun showProgressBar() {
+        binding.progressBar.show()
+    }
+
+    override fun hideProgressBar() {
+        binding.progressBar.hide()
     }
 
     override fun onBackPressed() = presenter.onBackPressed()
