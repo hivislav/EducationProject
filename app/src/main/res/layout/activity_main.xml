@@ -9,37 +9,37 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/tvText1"
+        android:id="@+id/textViewOne"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/this_is_the_button" />
 
     <Button
-        android:id="@+id/btnNumber1"
+        android:id="@+id/buttonNumberOne"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/number_1" />
 
     <TextView
-        android:id="@+id/tvText2"
+        android:id="@+id/textViewTwo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/this_is_the_button" />
 
     <Button
-        android:id="@+id/btnNumber2"
+        android:id="@+id/buttonNumberTwo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/number_2" />
 
     <TextView
-        android:id="@+id/tvText3"
+        android:id="@+id/textViewThree"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/this_is_the_button" />
 
     <Button
-        android:id="@+id/btnNumber3"
+        android:id="@+id/buttonNumberThree"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/number_3" />
